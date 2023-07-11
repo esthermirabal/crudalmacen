@@ -1,6 +1,6 @@
 <?php 
 require("config.php");
-function conectar(){
+function conectare(){
 	try {
 		$conexion = mysqli_connect(server,usuario,clave,nombre);
 		return $conexion;

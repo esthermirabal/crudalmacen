@@ -1,7 +1,7 @@
 <?php 
 require("conexion.php");
 function listar(){
-	$conexion = conectar();
+	$conexion = conectare();
 	if($conexion != null){
 		$sql = "SELECT * FROM productos";
 		$consulta= mysqli_query($conexion,$sql);
@@ -35,7 +35,7 @@ if(isset($_POST["botonModificar"])) {
 	$nombre = $_POST["inputNombre"];
 	$precio = $_POST["inputPrecio"];
 	$sql = "UPDATE productos SET categoria='".$categoria."',fechaAlta='".$fechaAlta."',nombre='".$nombre."',precio='".$precio."' WHERE codigo='".$codigo."'";
-	$conexion = conectar();
+	$conexion = conectare();
 	$modificar = mysqli_query($conexion,$sql);
 
 	if ($modificar) {
@@ -45,7 +45,7 @@ if(isset($_POST["botonModificar"])) {
 	
 }
 if(isset($_POST["botonGuardar"])){
-	$conexion = conectar();
+	$conexion = conectare();
 	$categoria = $_POST["inputCategoria"];
 	$nombre = $_POST["inputNombre"];
 	$precio = $_POST["inputPrecio"];
@@ -60,7 +60,7 @@ if(isset($_POST["botonGuardar"])){
 }
 
 if (isset($_POST["botonLogin"])) {
-	$conexion = conectar();
+	$conexion = conectare();
 	$usuario = $_POST["inputNombreUsuario"];
 	$clave = $_POST["inputClaveUsuario"];
 	$sql="SELECT * FROM usuarios WHERE nombre ='".$usuario."' AND clave='".$clave."' ";
@@ -77,7 +77,7 @@ if (isset($_POST["botonLogin"])) {
 	}
 }
 function verProductos(){
-	$conexion = conectar();
+	$conexion = conectare();
 	$sql = "SELECT * FROM productos";
 	$consulta= mysqli_query($conexion,$sql);
 	if(mysqli_num_rows($consulta)>0){

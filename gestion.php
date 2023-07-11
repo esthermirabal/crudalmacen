@@ -16,7 +16,7 @@ verificarSesion();
 <body>
 	<?php require("navbar.php") ?>
 	<?php 
-	$conexion = conectar();
+	$conexion = conectare();
 	if ($conexion != null) {
 		echo '
 		<div class="container" style="height: 80vh;">

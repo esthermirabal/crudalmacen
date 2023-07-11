@@ -6,7 +6,7 @@ if (!isset($_GET["codigo"])) {
 	//Siempre usar header arriba de la etiqueta <head>
 	header("location:index.php");
 }else{
-	$conexion = conectar();
+	$conexion = conectare();
 	$sql = "SELECT * FROM productos WHERE codigo='".$_GET["codigo"]."'";
 	$buscar = mysqli_query($conexion,$sql);
 	if (mysqli_num_rows($buscar) > 0) {
