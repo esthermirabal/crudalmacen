@@ -4997,6 +4997,25 @@
   .d-print-none {
     display: none !important;
   }
+
+  .centered-image {
+    display: block;
+    margin: 0 auto;
+    float: left;
 }
+
+  .centered-button {
+    display: block;
+    margin: 0 auto;
+    width: 500px; /* Ajusta el tamaño deseado */
+    font-size: 25px; /* Ajusta el tamaño de la fuente deseado */
+  }
+
+
+}
+
+
+
+
 
 /*# sourceMappingURL=bootstrap-grid.css.map */
