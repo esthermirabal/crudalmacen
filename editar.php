@@ -1,12 +1,10 @@
 <?php
-
-require("conexion.php");
 require("consultas.php");
 if (!isset($_GET["codigo"])) {
 	//Siempre usar header arriba de la etiqueta <head>
 	header("location:index.php");
 }else{
-	$conexion = conectare();
+	$conexion = conectar();
 	$sql = "SELECT * FROM productos WHERE codigo='".$_GET["codigo"]."'";
 	$buscar = mysqli_query($conexion,$sql);
 	if (mysqli_num_rows($buscar) > 0) {
@@ -69,6 +67,9 @@ if (!isset($_GET["codigo"])) {
 			</div>
 			<div>
 				<button class="btn btn-lg btn-outline-primary" name="botonModificar">Modificar</button>
+			</div>
+			<div style="margin-left: 10%;">
+				<button class="btn btn-lg btn-outline-primary" name="botonEliminar">Eliminar</button>
 			</div>
 		</div>
 	</form>

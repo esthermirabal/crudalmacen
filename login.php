@@ -26,26 +26,21 @@ require("librerias.php");
 				<span class="visually-hidden">(current)</span>
 			</a>
 			</li>
-			<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="navbar.php">Registrarse</a>
-					<a class="dropdown-item" href="login.php">Iniciar Sesión</a>
-				</div>
-			</li>
 		</ul>
 		</div>
 	</div>
 	</nav>
-
-
-	
-	<div class="container col-6 mt-4" style="margin-left: 10%;">
-		<div class="row">
-			<?php verProductos(); ?>
-		</div>
-	</div>
-
+    <div class="form-group container">
+        <label style="font-size: 20px;" class="form-label mt-4">Usuario: </label>
+        <input type="text" style="font-size: 20px;">
+        <br><small class="form-text text-muted">Introduce tu usuario</small>
+    </div>
+    <div class="form-group container">
+        <label style="font-size: 20px;" class="form-label mt-4">Clave: </label>
+        <input type="text" style="font-size: 20px;">
+        <br><small class="form-text text-muted">Introduce tu clave</small>
+    </div>
+    </div>
 	
 	<script src="js/bootstrap.bundle.js"></script>
 </body>

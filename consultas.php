@@ -1,7 +1,7 @@
 <?php 
 require("conexion.php");
 function listar(){
-	$conexion = conectare();
+	$conexion = conectar();
 	if($conexion != null){
 		$sql = "SELECT * FROM productos";
 		$consulta= mysqli_query($conexion,$sql);
@@ -17,9 +17,18 @@ function listar(){
 				<td>'.$datos["precio"].' x kg</td>
 				<td><img src="'.$datos["imagen"].'" width=50,height=50></img></td>
 				<td>
-				<form method="GET" action="editar.php">
-				<button class="btn btn-sm btn-outline-dark" name="codigo" value="'.$datos["codigo"].'"><i class="fa-solid fa-pen-to-square" ></i></button>
-				</form>
+				<div class="row">
+					<div class="col">
+    				<form method="GET" action="editar.php">
+					<button class="btn btn-sm btn-outline-dark" name="codigo" value="'.$datos["codigo"].'"><i class="fa-solid fa-pen-to-square" ></i></button>
+					</form>
+				</div>
+				<div class="col">
+					<form method="GET" action="vender.php">
+					<button class="btn btn-sm btn-outline-dark" name="vender" value="'.$datos["codigo"].'">🤑</button>
+					</form>
+				</div>
+				</div>
 				</td>
 				</tr>
 				';
@@ -35,17 +44,29 @@ if(isset($_POST["botonModificar"])) {
 	$nombre = $_POST["inputNombre"];
 	$precio = $_POST["inputPrecio"];
 	$sql = "UPDATE productos SET categoria='".$categoria."',fechaAlta='".$fechaAlta."',nombre='".$nombre."',precio='".$precio."' WHERE codigo='".$codigo."'";
-	$conexion = conectare();
+	$conexion = conectar();
 	$modificar = mysqli_query($conexion,$sql);
-
 	if ($modificar) {
 		mysqli_close($conexion);
 		header("location:index.php");
 	}
-	
+}
+if(isset($_POST["botonEliminar"])) {
+	$codigo = $_POST["inputCodigo"];
+	$categoria = $_POST["inputCategoria"];
+	$fechaAlta = $_POST["inputFecha"];
+	$nombre = $_POST["inputNombre"];
+	$precio = $_POST["inputPrecio"];
+	$sql = "DELETE FROM productos WHERE codigo='".$codigo."'";
+	$conexion = conectar();
+	$eliminar = mysqli_query($conexion,$sql);
+	if ($eliminar) {
+		mysqli_close($conexion);
+		header("location:index.php");
+	}
 }
 if(isset($_POST["botonGuardar"])){
-	$conexion = conectare();
+	$conexion = conectar();
 	$categoria = $_POST["inputCategoria"];
 	$nombre = $_POST["inputNombre"];
 	$precio = $_POST["inputPrecio"];
@@ -60,7 +81,7 @@ if(isset($_POST["botonGuardar"])){
 }
 
 if (isset($_POST["botonLogin"])) {
-	$conexion = conectare();
+	$conexion = conectar();
 	$usuario = $_POST["inputNombreUsuario"];
 	$clave = $_POST["inputClaveUsuario"];
 	$sql="SELECT * FROM usuarios WHERE nombre ='".$usuario."' AND clave='".$clave."' ";
@@ -77,7 +98,7 @@ if (isset($_POST["botonLogin"])) {
 	}
 }
 function verProductos(){
-	$conexion = conectare();
+	$conexion = conectar();
 	$sql = "SELECT * FROM productos";
 	$consulta= mysqli_query($conexion,$sql);
 	if(mysqli_num_rows($consulta)>0){
