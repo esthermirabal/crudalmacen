@@ -2,7 +2,7 @@
 require("consultas.php");
 if (!isset($_GET["codigo"])) {
 	//Siempre usar header arriba de la etiqueta <head>
-	header("location:index.php");
+	header("location:gestion.php");
 }else{
 	$conexion = conectar();
 	$sql = "SELECT * FROM productos WHERE codigo='".$_GET["codigo"]."'";
@@ -63,7 +63,7 @@ if (!isset($_GET["codigo"])) {
 		?>
 		<div class="d-flex justify-content-center mt-2">
 			<div style="margin-right: 10%;">
-				<a class="btn btn-lg btn-outline-primary" href="http://localhost/incuyo/Crud%20almacen%2023-6/">Volver</a>
+				<a class="btn btn-lg btn-outline-primary" href="gestion.php">Volver</a>
 			</div>
 			<div>
 				<button class="btn btn-lg btn-outline-primary" name="botonModificar">Modificar</button>

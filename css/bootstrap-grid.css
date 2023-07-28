@@ -5002,7 +5002,7 @@
     display: block;
     margin: 0 auto;
     float: left;
-}
+  }
 
   .centered-button {
     display: block;
@@ -5010,9 +5010,15 @@
     width: 500px; /* Ajusta el tamaño deseado */
     font-size: 25px; /* Ajusta el tamaño de la fuente deseado */
   }
-
-
+  .centered-text {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .button-container {
+    margin-top: 20px; /* Ajusta el valor para crear espacio entre el botón y la tabla */
+  }
 }
+
 
 
 

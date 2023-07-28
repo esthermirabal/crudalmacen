@@ -14,7 +14,33 @@ verificarSesion();
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-	<?php require("navbar.php") ?>
+	<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"><img src="imagenes/giga.png" class="centered-image"></a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+		<ul class="navbar-nav me-auto">
+			<li class="nav-item">
+				<a class="nav-link active" href="gestion.php">Inicio
+					<span class="visually-hidden">(current)</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="nuevo.php">Agregar Producto
+					<span class="visually-hidden">(current)</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="index.php">Cerrar Sesión
+					<span class="visually-hidden">(current)</span>
+				</a>
+			</li>
+		</ul>
+		</div>
+	</div>
+	</nav>
 	<?php 
 	$conexion = conectar();
 	if ($conexion != null) {
@@ -41,9 +67,6 @@ verificarSesion();
 	echo '        
 	    </tbody>
 	    </table>
-    </div>
-    <div class="d-flex justify-content-center">
-    	<a class="btn btn-lg btn-primary" href="nuevo.php">Agregar nuevo producto</a>
     </div>
 		';
 	}

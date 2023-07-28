@@ -13,11 +13,12 @@ verificarSesion();
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body>
-	<h1 class="bg-primary text-white text-center">
-		<a href="http://localhost/incuyo/Crud%20almacen%23-6/" style="text-decoration: none; color: white;">
-			Almacén "El Pepe"
-		</a>
-	</h1>
+	<nav class="navbar navbar-expand-lg">
+	<div class="container d-flex justify-content-center">
+		<img src="imagenes/giga.png" class="centered-image">
+	</div>
+	</nav>
+
 	<form method="POST">
 		<div class="container col-6">
 		<div class="mb-3">
@@ -40,13 +41,13 @@ verificarSesion();
 			<label class="form-label">Precio</label>
 			<input type="text" name="inputPrecio" class="form-control" placeholder="Precio del producto" required>
 		</div>
-		</div>
 		<?php
-		if(isset($guardado)){echo '<h4 class="bg-success">Se ha guardado exitosamente</h4>';}
+		if(isset($guardado)){echo '<div class="container-justify-center centered-text"><label font-size:24px>Se ha guardado exitosamente</label></div>';}
 		?>
+		</div>
 		<div class="d-flex justify-content-center mt-2">
 			<div style="margin-right: 10%;">
-				<a class="btn btn-lg btn-outline-primary" href="http://localhost/incuyo/Crud%20almacen%2023-6/">Volver</a>
+				<a class="btn btn-lg btn-outline-primary" href="gestion.php">Volver</a>
 			</div>
 			<div>
 				<button class="btn btn-lg btn-outline-primary" name="botonGuardar">Guardar</button>

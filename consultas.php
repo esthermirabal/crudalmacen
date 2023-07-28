@@ -48,7 +48,7 @@ if(isset($_POST["botonModificar"])) {
 	$modificar = mysqli_query($conexion,$sql);
 	if ($modificar) {
 		mysqli_close($conexion);
-		header("location:index.php");
+		header("location:gestion.php");
 	}
 }
 if(isset($_POST["botonEliminar"])) {
@@ -62,7 +62,7 @@ if(isset($_POST["botonEliminar"])) {
 	$eliminar = mysqli_query($conexion,$sql);
 	if ($eliminar) {
 		mysqli_close($conexion);
-		header("location:index.php");
+		header("location:gestion.php");
 	}
 }
 if(isset($_POST["botonGuardar"])){
@@ -81,22 +81,25 @@ if(isset($_POST["botonGuardar"])){
 }
 
 if (isset($_POST["botonLogin"])) {
-	$conexion = conectar();
-	$usuario = $_POST["inputNombreUsuario"];
-	$clave = $_POST["inputClaveUsuario"];
-	$sql="SELECT * FROM usuarios WHERE nombre ='".$usuario."' AND clave='".$clave."' ";
-	$busqueda = mysqli_query($conexion,$sql);
-	if(mysqli_num_rows($busqueda) > 0){
-		$_SESSION["login"] = $usuario;
-		header("location:gestion.php");
-	}else{
-		echo '
-		<script type="text/javascript">
-			alert("Usuario o contraseña invalido")
-		</script>
-		';
-	}
+    $conexion = conectar();
+    $usuario = $_POST["inputNombreUsuario"];
+    $clave = $_POST["inputClaveUsuario"];
+    $sql = "SELECT * FROM usuarios WHERE nombre = '".$usuario."' AND clave = '".$clave."' ";
+    $busqueda = mysqli_query($conexion, $sql);
+    if (mysqli_num_rows($busqueda) > 0) {
+        $_SESSION["login"] = $usuario;
+        header("location: gestion.php");
+        exit; // Evita que el código siga ejecutándose
+    } else {
+        echo '
+        <script type="text/javascript">
+            alert("Usuario o contraseña inválido");
+            window.location.href = "login.php"; // Redirige nuevamente a login.php en caso de error
+        </script>
+        ';
+    }
 }
+
 function verProductos(){
 	$conexion = conectar();
 	$sql = "SELECT * FROM productos";

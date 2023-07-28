@@ -30,17 +30,22 @@ require("librerias.php");
 		</div>
 	</div>
 	</nav>
-    <div class="form-group container">
-        <label style="font-size: 20px;" class="form-label mt-4">Usuario: </label>
-        <input type="text" style="font-size: 20px;">
-        <br><small class="form-text text-muted">Introduce tu usuario</small>
-    </div>
-    <div class="form-group container">
-        <label style="font-size: 20px;" class="form-label mt-4">Clave: </label>
-        <input type="text" style="font-size: 20px;">
-        <br><small class="form-text text-muted">Introduce tu clave</small>
-    </div>
-    </div>
+    <form method="POST">
+        <div class="form-group container">
+            <label style="font-size: 20px;" class="form-label mt-4">Usuario: </label>
+            <input type="text" name="inputNombreUsuario" style="font-size: 20px;">
+            <br><small class="form-text text-muted">Introduce tu usuario</small>
+        </div>
+        <div class="form-group container">
+            <label style="font-size: 20px;" class="form-label mt-4">Clave: </label>
+            <input type="password" name="inputClaveUsuario" style="font-size: 20px;">
+            <br><small class="form-text text-muted">Introduce tu clave</small>
+        </div>
+        <div class="form-group container">
+            <br><button type="submit" name="botonLogin" class="btn btn-secondary">Ingresar</button>
+        </div>
+    </form>
+
 	
 	<script src="js/bootstrap.bundle.js"></script>
 </body>

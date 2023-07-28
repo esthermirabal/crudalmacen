@@ -27,7 +27,7 @@ require("librerias.php");
 			</a>
 			</li>
 			<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Cuenta</a>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" href="navbar.php">Registrarse</a>
 					<a class="dropdown-item" href="login.php">Iniciar Sesión</a>
