@@ -29,7 +29,7 @@ require("librerias.php");
 			<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Cuenta</a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="navbar.php">Registrarse</a>
+					<a class="dropdown-item" href="registro.php">Registrarse</a>
 					<a class="dropdown-item" href="login.php">Iniciar Sesión</a>
 				</div>
 			</li>
@@ -40,7 +40,7 @@ require("librerias.php");
 
 
 	
-	<div class="container col-6 mt-4" style="margin-left: 10%;">
+	<div class="container col-6 mt-4" style="margin-left: auto; margin-right: auto;">
 		<div class="row">
 			<?php verProductos(); ?>
 		</div>

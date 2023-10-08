@@ -24,14 +24,12 @@ if (!isset($_GET["codigo"])) {
 </head>
 
 <body>
-
-	<h1 class="bg-primary text-white text-center">
-		<a href="http://localhost/incuyo/Crud%20almacen%23-6/" style="text-decoration: none; color: white;">
-			Almacén "El Pepe"
-		</a>
-	</h1>
-
-	<form method="POST">
+	<nav class="navbar navbar-expand-lg">
+		<div class="container d-flex justify-content-center">
+			<img src="imagenes/giga.png" class="centered-image">
+		</div>
+	</nav>
+	<form method="POST" action="consultas.php" enctype="multipart/form-data">
 		<div class="container col-6">
 		<div class="mb-3">
 			<label class="form-label">Código</label>
@@ -57,6 +55,11 @@ if (!isset($_GET["codigo"])) {
 			<input type="text" name="inputPrecio" class="form-control" placeholder="Precio del producto" 
 			value="<?php echo $datos["precio"]; ?>" required>
 		</div>
+		<div class="mb-3">
+			<label class="form-label">Imagen</label>
+			<input type="file" name="inputImagen" class="form-control" id="imgInp">
+			<img id="preview" src="#" alt="Ingrese una imagen">
+		</div>
 		</div>
 		<?php
 		if(isset($guardado)){echo '<h4 class="bg-success">Se ha guardado exitosamente</h4>';}
@@ -74,5 +77,13 @@ if (!isset($_GET["codigo"])) {
 		</div>
 	</form>
 	<script src="js/bootstrap.bundle.js"></script>
+	<script type="text/javascript">
+		imgInp.onchange = evt => {
+			const [file] = imgInp.files
+			if(file){
+				preview.src = URL.createObjectURL(file)
+			}
+		}
+	</script>
 </body>
 </html>
