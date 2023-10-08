@@ -31,28 +31,40 @@ require("librerias.php");
 		</div>
 	</div>
 	</nav>
-    <form method="POST">
-        <div class="form-group container">
-            <label style="font-size: 20px;" class="form-label mt-4"></label>
-            <input type="text" name="inputNombreUsuario" style="font-size: 20px;">
-            <br><small class="form-text text-muted">Introduce tu nombre de usuario</small>
-        </div>
-        <div class="form-group container">
-            <label style="font-size: 20px;" class="form-label mt-4"></label>
-            <input type="password" name="inputClaveUsuario" style="font-size: 20px;">
-            <br><small class="form-text text-muted">Introduce tu contraseña</small>
-        </div>
-        <div class="form-group container">
-            <label style="font-size: 20px;" class="form-label mt-4"></label>
-            <input type="password" name="inputConfirmarClave" style="font-size: 20px;">
-            <br><small class="form-text text-muted">Confirma tu contraseña</small>
-        </div>
+	<div class="container vh-100">
+    <div class="row d-flex justify-content-center align-items-center">
+        <form method="POST" class="col-md-6 p-4 bg-dark text-white shadow rounded">
+            <div class="form-group">
+                <label style="font-size: 20px;" class="form-label mt-4"></label>
+                <input type="text" name="inputNombreUsuario" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                <small class="form-text text-muted">Introduce tu nombre de usuario</small>
+            </div>
+            <div class="form-group">
+                <label style="font-size: 20px;" class="form-label mt-4"></label>
+                <input type="password" name="inputClaveUsuario" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                <small class="form-text text-muted">Introduce tu contraseña</small>
+            </div>
+            <div class="form-group">
+                <label style="font-size: 20px;" class="form-label mt-4"></label>
+                <input type="password" name="inputConfirmarClave" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                <small class="form-text text-muted">Confirma tu contraseña</small>
+            </div>
 
-        <div class="form-group container">
-            <br><button type="submit" name="botonRegistro" class="btn btn-secondary">Registrarse</button>
-        </div>
-    </form>
-	
+            <div class="form-group text-center">
+                <button type="submit" name="botonRegistro" class="btn btn-secondary">Registrarse</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+<footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
+    <div class="container">
+        <p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
+    </div>
+</footer>
 	<script src="js/bootstrap.bundle.js"></script>
 </body>
 </html>

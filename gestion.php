@@ -72,6 +72,11 @@ verificarSesion();
 	}
 	?>
 	
+	<footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
+    <div class="container">
+        <p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
+    </div>
+	</footer>
 	<script src="js/bootstrap.bundle.js"></script>
 </body>
 </html>

@@ -41,6 +41,11 @@ verificarSesion();
 			<label class="form-label">Precio</label>
 			<input type="text" name="inputPrecio" class="form-control" placeholder="Precio del producto" required>
 		</div>
+		<div class="mb-3">
+			<label class="form-label">Imagen</label>
+			<input type="file" name="inputImagen" class="form-control" id="imgInp">
+			<img id="preview" src="#" alt="Ingrese una imagen">
+		</div>
 		<?php
 		if(isset($guardado)){echo '<div class="container-justify-center centered-text"><label font-size:24px>Se ha guardado exitosamente</label></div>';}
 		?>
@@ -54,6 +59,22 @@ verificarSesion();
 			</div>
 		</div>
 	</form>
+
+	<footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
+    <div class="container">
+        <p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
+    </div>
+	</footer>
 	<script src="js/bootstrap.bundle.js"></script>
+	<script type="text/javascript">
+		imgInp.onchange = evt => {
+			const [file] = imgInp.files
+			if(file){
+				preview.src = URL.createObjectURL(file)
+			}
+		}
+	</script>
+
+
 </body>
 </html>
