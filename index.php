@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["carrito"] = [[1,1,2],]; //dentro de una array ingreso la posicion 1. y busca el usuario en el 2
 require("consultas.php");
 require("librerias.php");
 ?>
@@ -13,30 +14,7 @@ require("librerias.php");
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="#"><img src="imagenes/giga.png" class="centered-image"></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarColor01">
-		<ul class="navbar-nav me-auto">
-			<li class="nav-item">
-			<a class="nav-link active" href="index.php">Inicio
-				<span class="visually-hidden">(current)</span>
-			</a>
-			</li>
-			<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Cuenta</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="registro.php">Registrarse</a>
-					<a class="dropdown-item" href="login.php">Iniciar Sesión</a>
-				</div>
-			</li>
-		</ul>
-		</div>
-	</div>
-	</nav>
+    <?php require("navbar.php");?>
 
 
 	<div class="container mt-4">
@@ -46,8 +24,15 @@ require("librerias.php");
 		</div>
 	</div>
 
+    <!--php push array  agregar cosas al carrito -->
 
-	<footer style="background-color: #333; color: white; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
+
+
+
+
+
+
+	<footer style="background-color: #333; color: white; text-align: center; padding: 20px 0; bottom: 0; width: 100%;">
     <!--<div class="container">
         <div class="row">
 			<div class="row mt-3">
@@ -122,14 +107,11 @@ require("librerias.php");
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Home</a></li>
-                        <li><a class="text-decoration-none" href="#">About Us</a></li>
-                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
-                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                        <li><a class="text-decoration-none" href="#">Inicio</a></li>
+                        <li><a class="text-decoration-none" href="#">Nosotros</a></li>
+                        <li><a class="text-decoration-none" href="#">Contacto</a></li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="row text-light mb-4">
@@ -153,10 +135,10 @@ require("librerias.php");
                     </ul>
                 </div>
                 <div class="col-auto">
-                    <label class="sr-only" for="subscribeEmail">Email address</label>
+                    <label class="sr-only" for="subscribeEmail">Email</label>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-                        <div class="input-group-text btn-success text-light">Subscribe</div>
+                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Ingresa tu email">
+                        <div class="input-group-text btn-success text-light">Suscribirme</div>
                     </div>
                 </div>
             </div>

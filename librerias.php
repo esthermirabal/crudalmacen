@@ -1,5 +1,5 @@
 <?php 
-if (isset($_POST['cerrarSesion'])) {
+if (isset($_GET['cerrarSesion'])) {
 	session_destroy();
 	header("location:index.php");
 }

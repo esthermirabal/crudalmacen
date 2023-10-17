@@ -1,31 +1,32 @@
-<?php 
+<?php
 require("conexion.php");
-function listar(){
+function listar()
+{
 	$conexion = conectar();
-	if($conexion != null){
+	if ($conexion != null) {
 		$sql = "SELECT * FROM productos";
-		$consulta= mysqli_query($conexion,$sql);
-		if(mysqli_num_rows($consulta)>0){
-			while($datos = mysqli_fetch_assoc($consulta)){
-			            //var_dump($datos);
+		$consulta = mysqli_query($conexion, $sql);
+		if (mysqli_num_rows($consulta) > 0) {
+			while ($datos = mysqli_fetch_assoc($consulta)) {
+				//var_dump($datos);
 				echo '
 				<tr>
-				<th scope="row">'.$datos["codigo"].'</th>
-				<td>'.$datos["categoria"].'</td>
-				<td>'.$datos["fechaAlta"].'</td>
-				<td>'.$datos["nombre"].'</td>
-				<td>'.$datos["precio"].' x kg</td>
-				<td><img src="'.$datos["imagen"].'" width=50,height=50></img></td>
+				<th scope="row">' . $datos["codigo"] . '</th>
+				<td>' . $datos["categoria"] . '</td>
+				<td>' . $datos["fechaAlta"] . '</td>
+				<td>' . $datos["nombre"] . '</td>
+				<td>' . $datos["precio"] . '</td>
+				<td><img src="' . $datos["imagen"] . '" width=50,height=50></img></td>
 				<td>
 				<div class="row">
 					<div class="col">
     				<form method="GET" action="editar.php">
-					<button class="btn btn-sm btn-outline-dark" name="codigo" value="'.$datos["codigo"].'"><i class="fa-solid fa-pen-to-square" ></i></button>
+					<button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '"><i class="fa-solid fa-pen-to-square" ></i></button>
 					</form>
 				</div>
 				<div class="col">
 					<form method="GET" action="vender.php">
-					<button class="btn btn-sm btn-outline-dark" name="vender" value="'.$datos["codigo"].'">🤑</button>
+					<button class="btn btn-sm btn-outline-dark" name="vender" value="' . $datos["codigo"] . '">🤑</button>
 					</form>
 				</div>
 				</div>
@@ -37,7 +38,7 @@ function listar(){
 		mysqli_close($conexion);
 	}
 }
-if(isset($_POST["botonModificar"])) {
+if (isset($_POST["botonModificar"])) {
 	$codigo = $_POST["inputCodigo"];
 	$categoria = $_POST["inputCategoria"];
 	$fechaAlta = $_POST["inputFecha"];
@@ -47,60 +48,58 @@ if(isset($_POST["botonModificar"])) {
 		$ruta = "productos/default.png";
 	} else {
 		$nombreImagen = $_FILES['inputImagen']["name"];
-		$ruta = "productos/". $nombreImagen;
+		$ruta = "productos/" . $nombreImagen;
 		$contenido = file_get_contents($_FILES['inputImagen']["tmp_name"]);
 		move_uploaded_file($_FILES['inputImagen']["tmp_name"], $ruta);
 	}
 	$sql = "UPDATE productos SET categoria ='" . $categoria . "', fechaAlta='" . $fechaAlta . "', nombre='" . $nombre . "', precio='" . $precio . "', imagen='" . $ruta . "' WHERE codigo='" . $codigo . "'";
 	$conexion = conectar();
-	$modificar = mysqli_query($conexion,$sql);
+	$modificar = mysqli_query($conexion, $sql);
 	if ($modificar) {
 		mysqli_close($conexion);
 		header("location:gestion.php");
 	}
 }
-if(isset($_POST["botonEliminar"])) {
+if (isset($_POST["botonEliminar"])) {
 	$codigo = $_POST["inputCodigo"];
 	$categoria = $_POST["inputCategoria"];
 	$fechaAlta = $_POST["inputFecha"];
 	$nombre = $_POST["inputNombre"];
 	$precio = $_POST["inputPrecio"];
 	$imagen = $_POST["inputImagen"];
-	$sql = "DELETE FROM productos WHERE codigo='".$codigo."'";
+	$sql = "DELETE FROM productos WHERE codigo='" . $codigo . "'";
 	$conexion = conectar();
-	$eliminar = mysqli_query($conexion,$sql);
+	$eliminar = mysqli_query($conexion, $sql);
 	if ($eliminar) {
 		mysqli_close($conexion);
 		header("location:gestion.php");
 	}
 }
-
-
-/*
-No carga la imagen da error, pero si carga el resto de los datos
-if(isset($_POST["botonGuardar"])){
+//No carga la imagen da error, pero si carga el resto de los datos
+if (isset($_POST["botonGuardar"])) {
 	$conexion = conectar();
 	$categoria = $_POST["inputCategoria"];
 	$nombre = $_POST["inputNombre"];
 	$precio = $_POST["inputPrecio"];
-	$imagen = $_POST["inputImagen"];
-	if ($_FILES['inputImagen']["error"] > 0) {
+	//var_dump($_FILES);
+	$imagen = $_FILES["input_imagen"];
+	if ($_FILES['input_imagen']["error"] > 0) {
 		$ruta = "productos/default.png";
 	} else {
-		$nombreImagen = $_FILES['inputImagen']["name"];
-		$ruta = "productos/".$nombreImagen;
-		$contenido = file_get_contents($_FILES['inputImagen']["name"]);
-		move_uploaded_file($_FILES['inputImagen']["name"], $ruta);
-	
+		$nombreImagen = $_FILES['input_imagen']["name"];
+		$ruta = "productos/" . $nombreImagen;
+		$contenido = $_FILES['input_imagen']["tmp_name"];
+		move_uploaded_file($contenido, $ruta);
+
 		//Verifica si el archivo se ha movido correctamente antes de intentar leerlo
 		if (!$contenido) {
 			echo "No se pudo leer el archivo.";
 			//error de lectura aquí
 		}
 	}
-	//inserción en la base de datos
-	$sql = "INSERT INTO productos(categoria,nombre,precio,imagen) VALUES('".$categoria."','".$nombre."','".$precio."','".$ruta."')";
-	$guardar = mysqli_query($conexion,$sql);
+	//ingreso en la base de datos
+	$sql = "INSERT INTO productos(categoria,nombre,precio,imagen) VALUES('" . $categoria . "','" . $nombre . "','" . $precio . "','" . $ruta . "')";
+	$guardar = mysqli_query($conexion, $sql);
 	if (!$guardar) {
 		echo "Se ha producido algún error";
 	} else {
@@ -108,84 +107,135 @@ if(isset($_POST["botonGuardar"])){
 	}
 	mysqli_close($conexion);
 }
-*/
+
 if (isset($_POST["botonLogin"])) {
-    $conexion = conectar();
-    $usuario = $_POST["inputNombreUsuario"];
-    $clave = $_POST["inputClaveUsuario"];
-    $sql = "SELECT * FROM usuarios WHERE nombre = '".$usuario."' AND clave = '".$clave."' ";
-    $busqueda = mysqli_query($conexion, $sql);
-    if (mysqli_num_rows($busqueda) > 0) {
-        $_SESSION["login"] = $usuario;
-        header("location: gestion.php");
-        exit; // Evita que el código siga ejecutándose
-    } else {
-        echo '
+	$conexion = conectar();
+	$usuario = $_POST["inputNombreUsuario"];
+	$clave = $_POST["inputClaveUsuario"];
+	$sql = "SELECT * FROM usuarios WHERE nombre = '" . $usuario . "' AND clave = '" . $clave . "' ";
+	$busqueda = mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($busqueda) > 0) {
+		$datos = mysqli_fetch_all($busqueda);
+		var_dump($datos);
+		$_SESSION["login"] = $usuario;
+		$_SESSION["tipo"] = $datos[0][3];
+		header("location: index.php");
+		exit; // Evita que el código siga ejecutándose
+	} else {
+		echo '
         <script type="text/javascript">
             alert("Usuario o contraseña inválido");
             window.location.href = "login.php"; // Redirige nuevamente a login.php en caso de error
         </script>
         ';
-    }
+	}
 }
 
 if (isset($_POST["botonRegistro"])) {
-    $conexion = conectar();
-    $usuario = $_POST["inputNombreUsuario"];
-    $clave = $_POST["inputClaveUsuario"]; // Aquí asumo que "inputClaveUsuario" es el campo de contraseña
+	$conexion = conectar();
+	$usuario = $_POST["inputNombreUsuario"];
+	$clave = $_POST["inputClaveUsuario"]; // Aquí asumo que "inputClaveUsuario" es el campo de contraseña
 
-    // Verifica si los campos tienen al menos 6 caracteres
-    if (strlen($usuario) < 6 || strlen($clave) < 6) {
-        echo '
+	// Verifica si los campos tienen al menos 6 caracteres
+	if (strlen($usuario) < 6 || strlen($clave) < 6) {
+		echo '
         <script type="text/javascript">
             alert("El nombre de usuario y la contraseña deben tener al menos 6 caracteres.");
             window.location.href = "registro.php"; // Redirige nuevamente a registro.php en caso de error
         </script>
         ';
-        exit; // Salir del script en caso de error
-    }
+		exit; // Salir del script en caso de error
+	}
 
-    // Asegurémonos de que las contraseñas coincidan antes de continuar
-    $confirmarClave = $_POST["inputConfirmarClave"]; // Campo para confirmar la contraseña
-    if ($clave !== $confirmarClave) {
-        echo '
+	// Asegurémonos de que las contraseñas coincidan antes de continuar
+	$confirmarClave = $_POST["inputConfirmarClave"]; // Campo para confirmar la contraseña
+	if ($clave !== $confirmarClave) {
+		echo '
         <script type="text/javascript">
             alert("Las contraseñas no coinciden");
             window.location.href = "registro.php"; // Redirige nuevamente a registro.php en caso de error
         </script>
         ';
-        exit; // Salir del script en caso de error
-    }
-    
-    // Realiza la inserción en la base de datos (esto es solo un ejemplo, asegúrate de usar consultas preparadas para mayor seguridad)
-    $sql = "INSERT INTO usuarios (nombre, clave) VALUES ('$usuario', '$clave')";
-    
-    if (mysqli_query($conexion, $sql)) {
-        $_SESSION["login"] = $usuario;
-        header("location: gestion.php");
-        exit; // Evita que el código siga ejecutándose
-    } else {
-        echo '
+		exit; // Salir del script en caso de error
+	}
+
+	// Realiza la inserción en la base de datos (esto es solo un ejemplo, asegúrate de usar consultas preparadas para mayor seguridad)
+	$sql = "INSERT INTO usuarios (nombre, clave) VALUES ('$usuario', '$clave')";
+
+	if (mysqli_query($conexion, $sql)) {
+		$_SESSION["login"] = $usuario;
+		header("location: index.php");
+		exit; // Evita que el código siga ejecutándose
+	} else {
+		echo '
         <script type="text/javascript">
             alert("Error al registrar usuario");
             window.location.href = "registro.php"; // Redirige nuevamente a registro.php en caso de error
         </script>
         ';
-    }
+	}
 }
 
-function verProductos(){
+function listarBusqueda()
+{
+	if (isset($_POST["inputBuscar"])) {
+		//$inputs = $_POST;
+		//var_dump($inputs["inputBuscar"]);
+		$conexion = conectar();
+		if ($conexion != null) {
+			$buscar= "%".$_POST["inputBuscar"]."%";
+			$sql = "SELECT * FROM productos WHERE categoria LIKE '".$buscar."'";
+			$consulta = mysqli_query($conexion, $sql);
+			if (mysqli_num_rows($consulta) > 0) {
+				while ($datos = mysqli_fetch_assoc($consulta)) {
+					//var_dump($datos);
+					echo '
+					<tr>
+					<th scope="row">' . $datos["codigo"] . '</th>
+					<td>' . $datos["categoria"] . '</td>
+					<td>' . $datos["fechaAlta"] . '</td>
+					<td>' . $datos["nombre"] . '</td>
+					<td>' . $datos["precio"] . '</td>
+					<td><img src="' . $datos["imagen"] . '" width=50,height=50></img></td>
+					<td>
+					<div class="row">
+						<div class="col">
+						<form method="GET" action="editar.php">
+						<button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '"><i class="fa-solid fa-pen-to-square" ></i></button>
+						</form>
+					</div>
+					<div class="col">
+						<form method="GET" action="vender.php">
+						<button class="btn btn-sm btn-outline-dark" name="vender" value="' . $datos["codigo"] . '">🤑</button>
+						</form>
+					</div>
+					</div>
+					</td>
+					</tr>
+					';
+				}
+			}
+			mysqli_close($conexion);
+		}
+	}
+}
+
+
+function verProductos()
+{
 	$conexion = conectar();
-	$sql = "SELECT * FROM productos";
-	$consulta= mysqli_query($conexion,$sql);
-	if(mysqli_num_rows($consulta)>0){
-		while($datos = mysqli_fetch_assoc($consulta)){
+	$sql = "SELECT * FROM productos ORDER BY codigo DESC LIMIT 8";
+	$consulta = mysqli_query($conexion, $sql);
+	if (mysqli_num_rows($consulta) > 0) {
+		while ($datos = mysqli_fetch_assoc($consulta)) { //para agregar al carrito y redireccionar a los detalles del producto
 			echo '
 			<div class="card mb-4 mx-2" style="width: 18rem;">
-				<img src="'.$datos["imagen"].'" class="card-img-top" alt="...">
+			<a href="detalles.php?codigo='.$datos["codigo"].'"> 
+				<img src="' . $datos["imagen"] . '" class="card-img-top" alt="...">
+				</a>
 				<div class="card-body">
-					<h5 class="card-title">'.$datos["nombre"].'</h5>
-					<p class="card-text">'.$datos["precio"].'</p>
+					<h5 class="card-title">' . $datos["nombre"] . '</h5>
+					<p class="card-text">' . $datos["precio"] . '</p>
 				</div>
 			</div>
 			';
@@ -193,3 +243,9 @@ function verProductos(){
 	}
 }
 ?>
+<!--
+GET: BUSCAR
+DELETE: BORRAR
+PUT: MODIFICA UNA PARTE
+Y PATCH: MODIFICA TODO
+POST: GUARDAR-->
