@@ -15,6 +15,7 @@ function listar()
 				<td>' . $datos["categoria"] . '</td>
 				<td>' . $datos["fechaAlta"] . '</td>
 				<td>' . $datos["nombre"] . '</td>
+				<td>' . $datos["descripcion"] . '</td>
 				<td>' . $datos["precio"] . '</td>
 				<td><img src="' . $datos["imagen"] . '" width=50,height=50></img></td>
 				<td>
@@ -43,6 +44,7 @@ if (isset($_POST["botonModificar"])) {
 	$categoria = $_POST["inputCategoria"];
 	$fechaAlta = $_POST["inputFecha"];
 	$nombre = $_POST["inputNombre"];
+	$descripcion = $_POST["inputDescripcion"];
 	$precio = $_POST["inputPrecio"];
 	if ($_FILES['inputImagen']["error"] > 0) {
 		$ruta = "productos/default.png";
@@ -52,7 +54,7 @@ if (isset($_POST["botonModificar"])) {
 		$contenido = file_get_contents($_FILES['inputImagen']["tmp_name"]);
 		move_uploaded_file($_FILES['inputImagen']["tmp_name"], $ruta);
 	}
-	$sql = "UPDATE productos SET categoria ='" . $categoria . "', fechaAlta='" . $fechaAlta . "', nombre='" . $nombre . "', precio='" . $precio . "', imagen='" . $ruta . "' WHERE codigo='" . $codigo . "'";
+	$sql = "UPDATE productos SET categoria ='" . $categoria . "', fechaAlta='" . $fechaAlta . "', nombre='" . $nombre . "', descripcion='" . $descripcion . "', precio='" . $precio . "', imagen='" . $ruta . "' WHERE codigo='" . $codigo . "'";
 	$conexion = conectar();
 	$modificar = mysqli_query($conexion, $sql);
 	if ($modificar) {
@@ -65,6 +67,7 @@ if (isset($_POST["botonEliminar"])) {
 	$categoria = $_POST["inputCategoria"];
 	$fechaAlta = $_POST["inputFecha"];
 	$nombre = $_POST["inputNombre"];
+	$descripcion = $_POST["inputDescripcion"];
 	$precio = $_POST["inputPrecio"];
 	$imagen = $_POST["inputImagen"];
 	$sql = "DELETE FROM productos WHERE codigo='" . $codigo . "'";
@@ -80,6 +83,7 @@ if (isset($_POST["botonGuardar"])) {
 	$conexion = conectar();
 	$categoria = $_POST["inputCategoria"];
 	$nombre = $_POST["inputNombre"];
+	$descripcion = $_POST["inputDescripcion"];
 	$precio = $_POST["inputPrecio"];
 	//var_dump($_FILES);
 	$imagen = $_FILES["input_imagen"];
@@ -98,7 +102,7 @@ if (isset($_POST["botonGuardar"])) {
 		}
 	}
 	//ingreso en la base de datos
-	$sql = "INSERT INTO productos(categoria,nombre,precio,imagen) VALUES('" . $categoria . "','" . $nombre . "','" . $precio . "','" . $ruta . "')";
+	$sql = "INSERT INTO productos(categoria,nombre,descripcion,precio,imagen) VALUES('" . $categoria . "','" . $nombre . "','" . $descripcion . "','" . $precio . "','" . $ruta . "')";
 	$guardar = mysqli_query($conexion, $sql);
 	if (!$guardar) {
 		echo "Se ha producido algún error";
@@ -195,6 +199,7 @@ function listarBusqueda()
 					<td>' . $datos["categoria"] . '</td>
 					<td>' . $datos["fechaAlta"] . '</td>
 					<td>' . $datos["nombre"] . '</td>
+					<td>' . $datos["descripcion"] . '</td>
 					<td>' . $datos["precio"] . '</td>
 					<td><img src="' . $datos["imagen"] . '" width=50,height=50></img></td>
 					<td>
@@ -229,20 +234,33 @@ function verProductos()
 	if (mysqli_num_rows($consulta) > 0) {
 		while ($datos = mysqli_fetch_assoc($consulta)) { //para agregar al carrito y redireccionar a los detalles del producto
 			echo '
+			
 			<div class="card mb-4 mx-2" style="width: 18rem;">
-			<a href="detalles.php?codigo='.$datos["codigo"].'"> 
 				<img src="' . $datos["imagen"] . '" class="card-img-top" alt="...">
 				</a>
-				<div class="card-body">
+				<div class="card-body" >
 					<h5 class="card-title">' . $datos["nombre"] . '</h5>
 					<p class="card-text">' . $datos["precio"] . '</p>
-				</div>
+					<a href="detalles.php" class="btn btn-secondary">Ver detalles</a>
+			';
+			if (isset($_SESSION["login"])) {
+			echo'
+					<form action="compras.php" method="POST">
+					<input type="number" name="cantidad" value="1" min="1" style="width: 60px; height: 40px; margin-left: 15px;">
+                    <button name="codigo" value="'.$datos["codigo"].'" type="submit" class="btn btn-primary" style="margin-left: 10px;">Comprar</button>
+					</form>
+			';
+			}
+			echo '
+					</div>
 			</div>
 			';
 		}
 	}
 }
 ?>
+
+
 <!--
 GET: BUSCAR
 DELETE: BORRAR

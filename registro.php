@@ -1,8 +1,8 @@
 <!--HACER PAGINA DE REGISTRAR CON FORMULARIOS, ACOMODAR BOTONES Y VER DETALLES-->
 <?php
 session_start();
-require("consultas.php");
-require("librerias.php");
+require("global/consultas.php");
+require("global/librerias.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@ require("librerias.php");
 </head>
 
 <body>
-    <?php require("navbar.php"); ?>
+    <?php require("global/navbar.php"); ?>
     <div class="container vh-100">
         <div class="row d-flex justify-content-center align-items-center">
             <form method="POST" class="col-md-6 p-4 bg-dark text-white shadow rounded">
@@ -43,14 +43,8 @@ require("librerias.php");
         </div>
     </div>
 
-
-
-
-    <footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
-        <div class="container">
-            <p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    
+    <?php require("global/footer.php"); ?>
     <script src="js/bootstrap.bundle.js"></script>
 </body>
 

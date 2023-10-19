@@ -1,5 +1,5 @@
 <?php
-require("consultas.php");
+require("global/consultas.php");
 if (!isset($_GET["codigo"])) {
 	//Siempre usar header arriba de la etiqueta <head>
 	header("location:gestion.php");
@@ -25,7 +25,7 @@ if (!isset($_GET["codigo"])) {
 </head>
 
 <body>
-	<?php require("navbar.php"); ?>
+	<?php require("global/navbar.php"); ?>
 	<form method="POST" action="consultas.php" enctype="multipart/form-data">
 		<div class="container col-6">
 			<div class="mb-3">
@@ -43,6 +43,10 @@ if (!isset($_GET["codigo"])) {
 			<div class="mb-3">
 				<label class="form-label">Nombre</label>
 				<input type="text" name="inputNombre" class="form-control" placeholder="Nombre del producto" value="<?php echo $datos["nombre"]; ?>" required>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Descripcion</label>
+				<input type="text" name="inputDescripcion" class="form-control" placeholder="Descripcion del producto" value="<?php echo $datos["descripcion"]; ?>" required>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Precio</label>
@@ -72,11 +76,7 @@ if (!isset($_GET["codigo"])) {
 		</div>
 	</form>
 
-	<footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; bottom: 0; width: 100%;">
-		<div class="container">
-			<p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
-		</div>
-	</footer>
+	<?php require("global/footer.php"); ?>
 	<script src="js/bootstrap.bundle.js"></script>
 	<script type="text/javascript">
 		imgInp.onchange = evt => {

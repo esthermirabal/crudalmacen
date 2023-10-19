@@ -1,7 +1,7 @@
 <?php
 session_start();
-require("consultas.php");
-require("librerias.php");
+require("global/consultas.php");
+require("global/librerias.php");
 verificarSesion();
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ verificarSesion();
 </head>
 
 <body>
-	<?php require("navbar.php"); ?>
+	<?php require("global/navbar.php"); ?>
 
 	<form method="POST" enctype="multipart/form-data">
 		<div class="container col-6">
@@ -34,6 +34,10 @@ verificarSesion();
 			<div class="mb-3">
 				<label class="form-label">Nombre</label>
 				<input type="text" name="inputNombre" class="form-control" placeholder="Nombre del producto" required>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Descripción</label>
+				<input type="text" name="inputDescripcion" class="form-control" placeholder="Descripción del producto" required>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Precio</label>
@@ -60,11 +64,7 @@ verificarSesion();
 		</div>
 	</form>
 
-	<footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; bottom: 0; width: 100%;">
-		<div class="container">
-			<p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
-		</div>
-	</footer>
+	<?php require("global/footer.php"); ?>
 	<script src="js/bootstrap.bundle.js"></script>
 	<script type="text/javascript">
 		imgInp.onchange = evt => {

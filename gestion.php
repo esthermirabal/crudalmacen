@@ -4,8 +4,8 @@ if ($_SESSION["tipo"] == "user") {
 	header("location: index.php");
 }
 
-require("consultas.php");
-require("librerias.php");
+require("global/consultas.php");
+require("global/librerias.php");
 verificarSesion();
 ?>
 <!DOCTYPE html>
@@ -20,13 +20,13 @@ verificarSesion();
 </head>
 
 <body>
-	<?php require("navbar.php"); ?>
+	<?php require("global/navbar.php"); ?>
 	<?php
 	$conexion = conectar();
 	if ($conexion != null) {
 		echo '
-		<div class="container" style="height: 80vh;">
-		<form class="d-flex" method="POST">
+		<div class="container" style="height: 70vh;">
+		<form class="d-flex mb-3 mt-3" method="POST">
         	<input class="form-control me-2" type="search" name="inputBuscar" placeholder="Buscar" >
         	<button class="btn btn-outline-primary" name="botonBuscar" type="submit">Buscar</button>
       	</form>
@@ -37,6 +37,7 @@ verificarSesion();
 	        <th scope="col">Categoría</th>
 	        <th scope="col">Fecha</th>
 	        <th scope="col">Nombre</th>
+			<th scope="col">Descripcion</th>
 	        <th scope="col">Precio</th>
 	        <th scope="col">Imagen</th>
 	        <th></th>
@@ -55,12 +56,10 @@ verificarSesion();
 
 	}
 	?>
-
-	<footer class="bg-primary text-white text-center py-3" style="background-color: #333; color: white; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
-		<div class="container">
-			<p>&copy; <?php echo date('Y'); ?> Tu Nombre o Nombre de la Empresa. Todos los derechos reservados.</p>
-		</div>
-	</footer>
+	<div class="container d-flex justify-content-center mb-3">
+		<a href="nuevo.php" class="btn btn-secondary">Cargar Nuevos Articulos</a>
+	</div>
+	<?php require("global/footer.php")?>
 	<script src="js/bootstrap.bundle.js"></script>
 </body>
 
