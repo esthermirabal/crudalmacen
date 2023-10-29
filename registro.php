@@ -1,6 +1,5 @@
 <!--HACER PAGINA DE REGISTRAR CON FORMULARIOS, ACOMODAR BOTONES Y VER DETALLES-->
 <?php
-session_start();
 require("global/consultas.php");
 require("global/librerias.php");
 ?>
@@ -34,6 +33,16 @@ require("global/librerias.php");
                     <label style="font-size: 20px;" class="form-label mt-4"></label>
                     <input type="password" name="inputConfirmarClave" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
                     <small class="form-text text-muted">Confirma tu contraseña</small>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 20px;" class="form-label mt-4"></label>
+                    <input type="text" name="inputEmail" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                    <small class="form-text text-muted">Introduce email</small>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 20px;" class="form-label mt-4"></label>
+                    <input type="text" name="inputTelefono" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                    <small class="form-text text-muted">Introduce tu numero de telefono</small>
                 </div>
 
                 <div class="form-group text-center">

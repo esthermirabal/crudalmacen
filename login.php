@@ -1,5 +1,4 @@
 <?php
-session_start();
 require("global/consultas.php");
 require("global/librerias.php");
 ?>

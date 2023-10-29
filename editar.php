@@ -26,7 +26,7 @@ if (!isset($_GET["codigo"])) {
 
 <body>
 	<?php require("global/navbar.php"); ?>
-	<form method="POST" action="consultas.php" enctype="multipart/form-data">
+	<form method="POST" enctype="multipart/form-data">
 		<div class="container col-6">
 			<div class="mb-3">
 				<label class="form-label">Código</label>
@@ -45,8 +45,12 @@ if (!isset($_GET["codigo"])) {
 				<input type="text" name="inputNombre" class="form-control" placeholder="Nombre del producto" value="<?php echo $datos["nombre"]; ?>" required>
 			</div>
 			<div class="mb-3">
+				<label class="form-label">Cantidad</label>
+				<input type="text" name="inputCantidad" class="form-control" placeholder="Stock del producto" value="<?php echo $datos["cantidad"]; ?>" required>
+			</div>
+			<div class="mb-3">
 				<label class="form-label">Descripcion</label>
-				<input type="text" name="inputDescripcion" class="form-control" placeholder="Descripcion del producto" value="<?php echo $datos["descripcion"]; ?>" required>
+				<textarea type="text" name="inputDescripcion" class="form-control" style="width: 100%; height: 250px;" placeholder="Descripcion del producto" rows="4" required><?php echo $datos["descripcion"]; ?></textarea>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Precio</label>
@@ -55,7 +59,7 @@ if (!isset($_GET["codigo"])) {
 			<div class="mb-3">
 				<label class="form-label">Imagen</label>
 				<input type="file" name="inputImagen" class="form-control" id="imgInp">
-				<img id="preview" src="#" alt="Ingrese una imagen">
+				<img id="preview" src="productos/prueba.png" alt="Ingrese una imagen" width="100" height="100">
 			</div>
 		</div>
 		<?php

@@ -1,5 +1,4 @@
 <?php
-session_start();
 if ($_SESSION["tipo"] == "user") {
 	header("location: index.php");
 }
@@ -25,11 +24,12 @@ verificarSesion();
 	$conexion = conectar();
 	if ($conexion != null) {
 		echo '
-		<div class="container" style="height: 70vh;">
+		<div class="container-fluid" style="height: 100vh;">
 		<form class="d-flex mb-3 mt-3" method="POST">
         	<input class="form-control me-2" type="search" name="inputBuscar" placeholder="Buscar" >
         	<button class="btn btn-outline-primary" name="botonBuscar" type="submit">Buscar</button>
       	</form>
+		<div class="container" style="height: 80vh;width:80vw; overflow-y: scroll;">
 		<table class="table">
 	    <thead>
 	        <tr>
@@ -37,6 +37,7 @@ verificarSesion();
 	        <th scope="col">Categoría</th>
 	        <th scope="col">Fecha</th>
 	        <th scope="col">Nombre</th>
+			<th scope="col">Cantidad</th>
 			<th scope="col">Descripcion</th>
 	        <th scope="col">Precio</th>
 	        <th scope="col">Imagen</th>
@@ -51,7 +52,8 @@ verificarSesion();
 		echo '        
 	    </tbody>
 	    </table>
-    </div>
+		</div>
+    	</div>
 		';
 
 	}

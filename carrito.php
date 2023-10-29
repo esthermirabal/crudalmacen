@@ -13,12 +13,15 @@ if (isset($_POST['codigo'])) {
     // Agregar el producto al carrito (puedes validar y filtrar los datos aquí)
     $articulo = [
         "codigo"=>$codigo,
+        "stock"=>$datos["cantidad"],
         "cantidad"=>$cantidad,
         "nombre"=>$datos["nombre"], 
         "precio"=>$datos["precio"]
     ];
     array_push($_SESSION['carrito'], $articulo);
+
     
+    //Aquí  
     //var_dump($_SESSION["carrito"]);
     /*
     foreach($_SESSION["carrito"] as $articulo){

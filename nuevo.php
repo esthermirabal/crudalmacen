@@ -36,8 +36,12 @@ verificarSesion();
 				<input type="text" name="inputNombre" class="form-control" placeholder="Nombre del producto" required>
 			</div>
 			<div class="mb-3">
-				<label class="form-label">Descripción</label>
-				<input type="text" name="inputDescripcion" class="form-control" placeholder="Descripción del producto" required>
+				<label class="form-label">Cantidad</label>
+				<input type="text" name="inputCantidad" class="form-control" placeholder="Stock del producto" required>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Descripcion</label>
+				<textarea type="text" name="inputDescripcion" class="form-control" style="width: 100%; height: 250px;" placeholder="Descripcion del producto" rows="4" value="<?php echo $datos["descripcion"]; ?>" required></textarea>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Precio</label>
