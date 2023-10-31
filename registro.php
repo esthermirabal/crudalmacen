@@ -16,9 +16,24 @@ require("global/librerias.php");
 
 <body>
     <?php require("global/navbar.php"); ?>
-    <div class="container vh-100">
+    <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <form method="POST" class="col-md-6 p-4 bg-dark text-white shadow rounded">
+                <div class="form-group">
+                    <label style="font-size: 20px;" class="form-label mt-4"></label>
+                    <input type="text" name="inputNombre" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                    <small class="form-text text-muted">Introduce tu nombre</small>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 20px;" class="form-label mt-4"></label>
+                    <input type="text" name="inputApellido" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                    <small class="form-text text-muted">Introduce tu apellido</small>
+                </div>
+                <div class="form-group">
+                    <label style="font-size: 20px;" class="form-label mt-4"></label>
+                    <input type="text" name="inputDni" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                    <small class="form-text text-muted">Introduce tu numero de DNI</small>
+                </div>
                 <div class="form-group">
                     <label style="font-size: 20px;" class="form-label mt-4"></label>
                     <input type="text" name="inputNombreUsuario" style="font-size: 20px; background-color: #333; color: white;" class="form-control">

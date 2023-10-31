@@ -16,14 +16,14 @@ require("global/librerias.php");
 
 <body>
     <?php require("global/navbar.php");
-    $elementosPorPagina = 8; // Cantidad de elementos a mostrar por página
+    $productosPorPagina = 8; // Cantidad de productos a mostrar por página
     $paginaActual = isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>
 
 
     <div class="container mt-4">
         <div class="row justify-content-center" style="margin-left: auto; margin-right: auto;">
             <div class="row">
-                <?php verProductos($paginaActual, $elementosPorPagina); ?>
+                <?php verProductos($paginaActual, $productosPorPagina); ?>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ require("global/librerias.php");
 <body>
     <?php require("global/navbar.php"); ?>
     
-    <table class="table" style="margin: 0 auto; width: 60%; height:40vh;overflow-y: scroll;">
+    <table class="table" style="margin: 20px auto; width: 60%; height:40vh; overflow-y: scroll;">
         <thead>
             <tr>
                 <th scope="col">Código</th> <!--TH  encabezados-->

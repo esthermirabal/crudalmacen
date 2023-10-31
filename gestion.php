@@ -25,8 +25,8 @@ verificarSesion();
 	if ($conexion != null) {
 		echo '
 		<div class="container-fluid" style="height: 100vh;">
-		<form class="d-flex mb-3 mt-3" method="POST">
-        	<input class="form-control me-2" type="search" name="inputBuscar" placeholder="Buscar" >
+		<form class="d-flex justify-content-center mb-3 mt-3" method="POST">
+        	<input class="form-control me-2" style="height: 5vh;width:50vw" type="search" name="inputBuscar" placeholder="Buscar" >
         	<button class="btn btn-outline-primary" name="botonBuscar" type="submit">Buscar</button>
       	</form>
 		<div class="container" style="height: 80vh;width:80vw; overflow-y: scroll;">

@@ -124,10 +124,10 @@ if (isset($_POST["botonLogin"])) {
 	$busqueda = mysqli_query($conexion, $sql);
 	if (mysqli_num_rows($busqueda) > 0) {
 		$datos = mysqli_fetch_all($busqueda);
-		var_dump($datos);
+		//var_dump($datos);
 		$_SESSION["login"] = $usuario;
 		$_SESSION["id"] = $datos[0][0];
-		$_SESSION["tipo"] = $datos[0][5];
+		$_SESSION["tipo"] = $datos[0][8];
 		header("location: index.php");
 		exit; // Evita que el código siga ejecutándose
 	} else {
@@ -142,6 +142,9 @@ if (isset($_POST["botonLogin"])) {
 
 if (isset($_POST["botonRegistro"])) {
 	$conexion = conectar();
+	$nombre = $_POST["inputNombre"];
+	$apellido = $_POST["inputApellido"];
+	$dni = $_POST["inputDni"];
 	$usuario = $_POST["inputNombreUsuario"];
 	$clave = $_POST["inputClaveUsuario"]; // Aquí asumo que "inputClaveUsuario" es el campo de contraseña
 	$email = $_POST["inputEmail"];
@@ -172,12 +175,12 @@ if (isset($_POST["botonRegistro"])) {
 
 	// Realiza la inserción en la base de datos
 	//$sql = "INSERT INTO usuarios (nombre, clave) VALUES ('$usuario', '$clave')";
-	$sql = "INSERT INTO usuarios (nombre, clave, email, telefono) VALUES ('$usuario', '$clave','$email', '$telefono')";
+	$sql = "INSERT INTO usuarios (nombre, apellido, dni, usuario, clave, email, telefono) VALUES ('$nombre', '$apellido', '$dni','$usuario', '$clave','$email', '$telefono')";
 	$guardar = mysqli_query($conexion, $sql);
 	if ($guardar) {
 		$_SESSION["login"] = $usuario;
 		$_SESSION["id"] = $datos[0][0];
-		$_SESSION["tipo"] = $datos[0][5];
+		$_SESSION["tipo"] = $datos[0][8];
 		header("location: index.php");
 		exit; // Evita que el código siga ejecutándose
 	} else {
