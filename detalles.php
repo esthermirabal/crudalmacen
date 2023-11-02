@@ -39,17 +39,20 @@ require("global/librerias.php");
 				$precio = $fila["precio"];
 				$imagen = $fila["imagen"];
 				?>
-				<div class="container">
+				<div class="container" style="margin: 60px auto;">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="<?php echo $imagen; ?>" alt="Imagen del Producto">
+                            <img src="<?php echo $imagen; ?>" alt="Imagen del Producto" style="max-width: 80%; max-height: 80%; ">
                         </div>
                         <div class="col-md-6">
-                            <h1><?php echo $nombre; ?></h1>
-                            <p>Descripcion: <?php echo $descripcion; ?></p>
-                            <p>Precio: $<?php echo $precio; ?></p>
+                            <h1 style="text-align: center;"><?php echo $nombre; ?></h1>
+							<br>
+                            <h4><b>Descripción: </b> </h3>
+							<p style="text-align: justify;"><?php echo $descripcion; ?></p>
+							<h4><b>Precio: </b> </h3>
+                            <p>$ <?php echo $precio; ?><span style="font-size: 15px;">,00</p>
 							<!-- acomodar este boton-->
-							<?php echo' 
+							<?php echo'
 							<form action="compras.php" method="POST">
 								<input type="number" name="cantidad" value="1" min="1" style="width: 60px; height: 40px; margin-left: 15px;">
                     			<button name="codigo" value="'.$fila["codigo"].'" type="submit" class="btn btn-primary" style="margin-left: 10px;">Comprar</button>

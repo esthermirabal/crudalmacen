@@ -29,7 +29,7 @@ verificarSesion();
         	<input class="form-control me-2" style="height: 5vh;width:50vw" type="search" name="inputBuscar" placeholder="Buscar" >
         	<button class="btn btn-outline-primary" name="botonBuscar" type="submit">Buscar</button>
       	</form>
-		<div class="container" style="height: 80vh;width:80vw; overflow-y: scroll;">
+		<div class="container" style="height: 80vh;width:100vw; overflow-y: scroll;">
 		<table class="table">
 	    <thead>
 	        <tr>

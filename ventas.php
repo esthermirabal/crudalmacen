@@ -17,18 +17,19 @@ require("global/consultas.php");
     <?php require("global/navbar.php");    ?>
     <h1 style="text-align: center; margin: 20px auto">Ventas Realizadas</h1>
     <div class="container">
-        <table class="table" border="1" style="margin: 20px auto;">
+        <table class="table table-bordered" style="margin: 20px auto;">
             <tr>
-                <th scope="col">Venta ID</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">DNI</th>
-                <th scope="col">ItemVenta ID</th>
-                <th scope="col">Producto ID</th>
-                <th scope="col">Nombre del Producto</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Precio</th>
+                <th scope="col" style="text-align: center;">Venta ID</th>
+                <th scope="col" style="text-align: center;">Fecha</th>
+                <th scope="col" style="text-align: center;">Nombre</th>
+                <th scope="col" style="text-align: center;">Apellido</th>
+                <th scope="col" style="text-align: center;">DNI</th>
+                <th scope="col" style="text-align: center;">Item Venta</th>
+                <th scope="col" style="text-align: center;">Producto</th>
+                <th scope="col" style="text-align: center;">Nombre del Producto</th>
+                <th scope="col" style="text-align: center;">Cantidad</th>
+                <th scope="col" style="text-align: center;">Precio</th>
+                
             </tr>
 
             <?php
@@ -47,15 +48,15 @@ require("global/consultas.php");
                 while ($fila = mysqli_fetch_assoc($resultado)) {
                     echo '<tr>
                 <td scope="row">' . $fila["venta_id"] . '</td>
-                <td>' . $fila["fecha"] . '</td>
-                <td>' . $fila["nombre"] . '</td>
-                <td>' . $fila["apellido"] . '</td>
-                <td>' . $fila["dni"] . '</td>
-                <td>' . $fila["item_id"] . '</td>
-                <td>' . $fila["id_producto"] . '</td>
-                <td>' . $fila["nombre_producto"] . '</td>
-                <td>' . $fila["cantidad"] . '</td>
-                <td>' . $fila["precio"] . '</td>
+                <td style="text-align: center;">' . $fila["fecha"] . '</td>
+                <td style="text-align: center;">' . $fila["nombre"] . '</td>
+                <td style="text-align: center;">' . $fila["apellido"] . '</td>
+                <td style="text-align: center;">' . $fila["dni"] . '</td>
+                <td style="text-align: center;">' . $fila["item_id"] . '</td>
+                <td style="text-align: center;">' . $fila["id_producto"] . '</td>
+                <td style="text-align: center;">' . $fila["nombre_producto"] . '</td>
+                <td style="text-align: center;">' . $fila["cantidad"] . '</td>
+                <td style="text-align: center;">' . $fila["precio"] . '</td>
                 </tr>';
                 }
             } else {

@@ -17,32 +17,35 @@ require("global/consultas.php");
     <?php require("global/navbar.php");    ?>
     <h1 style="text-align: center; margin: 20px auto">Ventas Realizadas</h1>
     <div class="container">
-        <table class="table" border="1" style="margin: 20px auto;">
+        <table class="table table-bordered" style="margin: 20px auto;">
             <tr>
-                <th scope="col">Fecha</th>
-                <th scope="col">Nombre del Producto</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Total</th>
+                <th scope="col" style="text-align: center;">Venta Id</th>
+                <th scope="col" style="text-align: center;">Fecha</th>
+                <th scope="col" style="text-align: center;">Nombre del Producto</th>
+                <th scope="col" style="text-align: center;">Cantidad</th>
+                <th scope="col" style="text-align: center;">Total</th>
             </tr>
 
             <?php
             // Establece la conexión a la base de datos
             $conexion = conectar();
             // Realiza una consulta para obtener todas las ventas con datos de usuario y producto
-            $sql = "SELECT venta.fecha, productos.nombre AS nombre_producto, itemVenta.cantidad, (itemVenta.cantidad * itemVenta.precio) AS total
+            $sql = "SELECT venta.id, venta.fecha, productos.nombre AS nombre_producto, itemVenta.cantidad, (itemVenta.cantidad * itemVenta.precio) AS total
             FROM venta
             LEFT JOIN itemVenta ON venta.id = itemVenta.venta_id
-            LEFT JOIN productos ON itemVenta.id_producto = productos.codigo";
+            LEFT JOIN productos ON itemVenta.id_producto = productos.codigo
+            WHERE venta.usuario_id = " . $_SESSION["id"];
 
             $resultado = mysqli_query($conexion, $sql);
 
             if ($resultado) {
                 while ($fila = mysqli_fetch_assoc($resultado)) {
                     echo '<tr>
-                <td scope="row">' . $fila["fecha"] . '</td>
-                <td>' . $fila["nombre_producto"] . '</td>
-                <td>' . $fila["cantidad"] . '</td>
-                <td>' . $fila["total"] . '</td>
+                <td scope="row" style="text-align: center;">' . $fila["id"] . '</td>
+                <td style="text-align: center;">' . $fila["fecha"] . '</td>
+                <td style="text-align: center;">' . $fila["nombre_producto"] . '</td>
+                <td style="text-align: center;">' . $fila["cantidad"] . '</td>
+                <td style="text-align: center;">' . $fila["total"] . '</td>
                 </tr>';
                 }
             } else {

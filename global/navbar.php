@@ -12,13 +12,13 @@
                     </a>
                 </li>
                 <?php
-                //if (isset($_SESSION["login"]) && $_SESSION["login"] == "user") { --> ACOMODAR PARA QUE SE MUESTRE LA COMPRA DE MIS USUARIOS
-                 //   echo '<li class="nav-item">
-                    //<a class="nav-link active" href="miscompras.php">Mis Compras
-                       // <span class="visually-hidden">(current)</span>
-                    //</a>
-                //</li>';
-                //}
+                if (isset($_SESSION["login"]) && $_SESSION["tipo"] == "user") {
+                 echo '<li class="nav-item">
+                    <a class="nav-link active" href="miscompras.php">Mis Compras
+                     <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>';
+                }
                 if (!(isset($_SESSION["login"]))) {
                     echo '<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Cuenta</a>

@@ -120,13 +120,18 @@ if (isset($_POST["botonLogin"])) {
 	$conexion = conectar();
 	$usuario = $_POST["inputNombreUsuario"];
 	$clave = $_POST["inputClaveUsuario"];
-	$sql = "SELECT * FROM usuarios WHERE nombre = '" . $usuario . "' AND clave = '" . $clave . "' ";
+	$sql = "SELECT * FROM usuarios WHERE usuario = '" . $usuario . "' AND clave = '" . $clave . "' ";
 	$busqueda = mysqli_query($conexion, $sql);
 	if (mysqli_num_rows($busqueda) > 0) {
 		$datos = mysqli_fetch_all($busqueda);
 		//var_dump($datos);
 		$_SESSION["login"] = $usuario;
 		$_SESSION["id"] = $datos[0][0];
+		$_SESSION["nombre"] = $datos[0][1];
+		$_SESSION["apellido"] = $datos[0][2];
+		$_SESSION["dni"] = $datos[0][3];
+		$_SESSION["email"] = $datos[0][6];
+		$_SESSION["telefono"] = $datos[0][7];
 		$_SESSION["tipo"] = $datos[0][8];
 		header("location: index.php");
 		exit; // Evita que el código siga ejecutándose
@@ -180,6 +185,11 @@ if (isset($_POST["botonRegistro"])) {
 	if ($guardar) {
 		$_SESSION["login"] = $usuario;
 		$_SESSION["id"] = $datos[0][0];
+		$_SESSION["nombre"] = $datos[0][1];
+		$_SESSION["apellido"] = $datos[0][2];
+		$_SESSION["dni"] = $datos[0][3];
+		$_SESSION["email"] = $datos[0][6];
+		$_SESSION["telefono"] = $datos[0][7];
 		$_SESSION["tipo"] = $datos[0][8];
 		header("location: index.php");
 		exit; // Evita que el código siga ejecutándose
@@ -244,17 +254,17 @@ function verProductos($paginaActual, $productosPorPagina)
 {
 	$conexion = conectar();
 	$inicio = ($paginaActual - 1) * $productosPorPagina;
-	$sql = "SELECT * FROM productos ORDER BY codigo DESC LIMIT $inicio, $productosPorPagina";
+	$sql = "SELECT * FROM productos ORDER BY codigo ASC LIMIT $inicio, $productosPorPagina";
 	$consulta = mysqli_query($conexion, $sql);
 	if (mysqli_num_rows($consulta) > 0) {
 		while ($datos = mysqli_fetch_assoc($consulta)) { //para agregar al carrito y redireccionar a los detalles del producto
 			echo '
-			<div class="card mb-4 mx-2" style="width: 18rem;">
-				<img src="' . $datos["imagen"] . '" class="card-img-top" alt="..." style="width: 250px; height: 250px;">
+			<div class="card mb-4 mx-2" style="width: 18rem; margin: 20px;">
+				<img src="' . $datos["imagen"] . '" class="card-img-top" alt="..." style="width: 230px; height: 250px; margin: 12px;">
 				</a>
 				<div class="card-body" >
-					<h5 class="card-title">' . $datos["nombre"] . '</h5>
-					<h4 class="card-text" style="text-align: center;">$ ' . $datos["precio"] . '</h4>
+					<h5 class="card-title" style="text-align: center;">' . $datos["nombre"] . '</h5>
+					<h4 class="card-text" style="text-align: center;">$ ' . $datos["precio"] . '<span style="font-size: 15px;">,00</h4>
 					<div style="text-align: center;">
     					<a href="detalles.php?codigo='.$datos["codigo"].'" class="btn btn-secondary">Ver detalles</a>
 					</div>

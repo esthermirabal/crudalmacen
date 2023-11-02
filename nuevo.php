@@ -1,5 +1,4 @@
 <?php
-session_start();
 require("global/consultas.php");
 require("global/librerias.php");
 verificarSesion();
@@ -50,7 +49,7 @@ verificarSesion();
 			<div class="mb-3">
 				<label class="form-label">Imagen</label>
 				<input type="file" name="input_imagen" class="form-control" id="imgInp">
-				<img id="preview" src="#" alt="Ingrese una imagen">
+				<img id="preview" src="#" alt="Ingrese una imagen" width="100" height="100">
 			</div>
 			<?php
 			if (isset($guardado)) {
