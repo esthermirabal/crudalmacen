@@ -26,11 +26,13 @@ require("global/librerias.php");
                 <th scope="col">Nombre</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Precio</th>
+                <th scope="col" style="text-align: center;">Eliminar</th>
             </tr>
         </thead>
         <tbody>
             <?php
             foreach ($_SESSION["carrito"] as $articulo) {
+                $index = array_search($articulo, $_SESSION["carrito"]); 
                 // td --> columnas normales
                 // tr--> filas
                 echo '<tr>
@@ -38,6 +40,12 @@ require("global/librerias.php");
                 <td>' . $articulo["nombre"] . '</td>
                 <td>' . $articulo["cantidad"] . '</td>
                 <td>' . $articulo["precio"] . '</td>
+                <td style="text-align: center;">
+                    <form method="POST" style="text-align: center;">
+                        <button type="submit" value="'.$index.'" name="eliminarItem" class="btn btn-sm" ><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </td>
+
                 </tr>';
             }
             ?>

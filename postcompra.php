@@ -9,17 +9,22 @@ if (isset($_POST["ventas"])) {
 	//for dato in datos == foreach($datos as $dato)
 	// array=["clave"=>valor]
 	$_SESSION["carrito_aux"] = $_SESSION["carrito"];
-	$total = 0;
+	$subtotal = 0;
 
 	// Inserta la venta en la tabla "venta"
 	$conexion = conectar();
-
-	$fecha = date("Y-m-d"); // Obtiene la fecha actual en formato 'YYYY-MM-DD'
+	foreach ($_SESSION["carrito"] as $articulo) {
+		$precio = $articulo["precio"] * $articulo["cantidad"];
+		$subtotal = $subtotal + $precio;
+	}
+	$iva = $subtotal * 0.21;
+	$total = $subtotal + $iva;
+	$fechaVenta = date("Y-m-d"); // Obtiene la fecha actual en formato 'YYYY-MM-DD'
 	$usuarioId = $_SESSION["id"];
-
-	$sql_venta = "INSERT INTO venta (fecha, usuario_id) VALUES (?, ?)";
+	require_once("ticket.php");
+	$sql_venta = "INSERT INTO venta (fecha, usuario_id,subtotal,iva,total, ticket) VALUES (?, ?, ?, ?, ?, ?)";
 	$stmt_venta = mysqli_prepare($conexion, $sql_venta);
-	mysqli_stmt_bind_param($stmt_venta, "si", $fecha, $usuarioId);
+	mysqli_stmt_bind_param($stmt_venta, "siddds", $fechaVenta, $usuarioId,$subtotal,$iva,$total, $filename);
 	mysqli_stmt_execute($stmt_venta);
 
 	// Obtener el ID de la venta recién insertada
@@ -35,11 +40,8 @@ if (isset($_POST["ventas"])) {
 		$nuevaCantidad = $articulo["stock"] - 1;
 		$sql = "UPDATE productos SET cantidad ='" . $nuevaCantidad . "'WHERE codigo='" . $articulo["codigo"] . "'";
 		$modificar = mysqli_query($conexion, $sql);
-		$subtotal = $articulo["precio"] * $articulo["cantidad"];
-		$total = $total + $subtotal;
 	}
-	$iva = $total * 0.21;
-	$totalVenta = $total + $iva;
+	
 	//venta(donde se guarda en la base de datos --)
 	// SELECT * FROM ventas WHERE id = $_SESSION["id"]
 	// SELECT * FROM ventas WHERE id = usuarios.id
@@ -51,6 +53,8 @@ if (isset($_POST["ventas"])) {
 	mysqli_close($conexion);
 
 	$_SESSION["carrito"] = [];
+}else {
+	header("location:index.php");
 }
 require("global/librerias.php");
 ?>
@@ -69,16 +73,13 @@ require("global/librerias.php");
 	<?php require("global/navbar.php");	?>
 	<h1 style="text-align: center; margin: 20px auto">Compra realizada con éxito</h1>
 	<div class="container" style="text-align: center; margin: 100px auto">
-		<h3 ><?php echo 'Sub Venta: $' . $total; ?></h3>
+		<h3 ><?php echo 'Sub Venta: $' . $subtotal; ?></h3>
 		<h3><?php echo 'Iva Venta: $' . $iva; ?></h3>
-		<h3><?php echo 'Total Venta: $' . $totalVenta; ?></h3>
+		<h3><?php echo 'Total Venta: $' . $total; ?></h3>
 	</div>
-
-	<form action="ticket.php" method="post" target="_blank" style="text-align: center;">
-		<button type="submit" class="btn" style="margin: 20px auto">Descargar Ticket</button>
-	</form>
-
-
+	<a href="<?php echo $filename; ?>" download="comprobante.pdf">
+		<button>Descargar</button>
+	</a>
 	<?php require("global/footer.php"); ?>
 </body>
 

@@ -45,6 +45,11 @@
                         <span class="visually-hidden">(current)</span>
                     </a>
                     </li>';
+                    echo '<li class="nav-item">
+                    <a class="nav-link" href="perfil.php">'.$_SESSION["nombre"].'
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                    </li>';
                 }
                 ?>
 

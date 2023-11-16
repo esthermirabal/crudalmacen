@@ -29,7 +29,21 @@ if (isset($_POST['codigo'])) {
         echo '<br>';
         echo 'codigo:'.$articulo["codigo"];
         echo '<br>';
-    }*/
+    }
+    carrito = [
+        [],
+        []
+    ]
+    
+    */
+}
+if(isset($_POST["eliminarItem"])){ //Elimina los items del carrito ordenandolos en forma ordenada
+    //var_dump($_SESSION["carrito"]);
+    //echo "<br>";
+    $index = $_POST["eliminarItem"];
+    //unset($_SESSION["carrito"][$index]); 
+    array_splice($_SESSION["carrito"], $index,1);
+    //var_dump($_SESSION["carrito"]);
 }
 
 ?>

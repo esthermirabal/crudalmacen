@@ -26,11 +26,6 @@ function listar()
 					<button class="btn btn-sm btn-outline-dark" name="codigo" value="' . $datos["codigo"] . '"><i class="fa-solid fa-pen-to-square" ></i></button>
 					</form>
 				</div>
-				<div class="col">
-					<form method="GET" action="compras.php">
-					<button class="btn btn-sm btn-outline-dark" name="vender" value="' . $datos["codigo"] . '">🤑</button>
-					</form>
-				</div>
 				</div>
 				</td>
 				</tr>

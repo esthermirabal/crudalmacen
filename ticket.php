@@ -1,4 +1,8 @@
 <?php
+
+date_default_timezone_set("America/Argentina/Mendoza");
+$fecha = date("d/m/Y");
+$hora = date("h:m:s");
 use FPDF as GlobalPDF;
 require('fpdf/fpdf.php');
 
@@ -81,7 +85,7 @@ $pdf->Cell(40, 10, 'Cantidad', 1, 0, 'C');
 $pdf->Cell(100, 10, 'Descripcion', 1, 0, 'C');
 $pdf->Cell(40, 10, 'Precio', 1, 1, 'C');
 
-$total = 0;
+
 $subtotal = 0;
 foreach ($_SESSION["carrito_aux"] as $articulo) {
     $pdf->SetFont('Arial', '', 10);
@@ -91,10 +95,10 @@ foreach ($_SESSION["carrito_aux"] as $articulo) {
 
     // Totales
     $subtotalArticulo = $articulo["precio"] * $articulo["cantidad"];
-    $subtotal = $subtotalArticulo;
-    $ivaArticulo = $subtotalArticulo * 0.21;
-    $total = $total + $subtotalArticulo + $ivaArticulo;
+    $subtotal = $subtotal + $subtotalArticulo;
 }
+$ivaArticulo = $subtotal * 0.21;
+$total = $subtotal + $ivaArticulo;
 
 $pdf->SetX(130);
 $pdf->SetFont('Arial', 'B', 13);
@@ -111,8 +115,13 @@ $pdf->SetFont('Arial', 'B', 13);
 $pdf->Cell(30, 10, '  Total', 1, 0);
 $pdf->SetFont('Arial', '', 13);
 $pdf->Cell(40, 10, $total, 1, 1, 'C');
-
+$pdf->SetY(260);
+$pdf->SetX(150);
+$fechaYHora = $fecha.", ".$hora;
+$pdf->Cell(40, 10, $fechaYHora);
 $pdf->AliasNbPages();
-$pdf->Output();
+$ticketname = "Ticket".date("dmYhms");
+$filename = "Tickets/{$ticketname}.pdf";
+$pdf->Output('F', $filename);
 
 ?>

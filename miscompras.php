@@ -24,13 +24,14 @@ require("global/consultas.php");
                 <th scope="col" style="text-align: center;">Nombre del Producto</th>
                 <th scope="col" style="text-align: center;">Cantidad</th>
                 <th scope="col" style="text-align: center;">Total</th>
+                <th scope="col" style="text-align: center;">Ticket</th>
             </tr>
 
             <?php
             // Establece la conexión a la base de datos
             $conexion = conectar();
             // Realiza una consulta para obtener todas las ventas con datos de usuario y producto
-            $sql = "SELECT venta.id, venta.fecha, productos.nombre AS nombre_producto, itemVenta.cantidad, (itemVenta.cantidad * itemVenta.precio) AS total
+            $sql = "SELECT venta.id, venta.fecha,venta.total, venta.ticket, productos.nombre,itemVenta.cantidad 
             FROM venta
             LEFT JOIN itemVenta ON venta.id = itemVenta.venta_id
             LEFT JOIN productos ON itemVenta.id_producto = productos.codigo
@@ -43,9 +44,12 @@ require("global/consultas.php");
                     echo '<tr>
                 <td scope="row" style="text-align: center;">' . $fila["id"] . '</td>
                 <td style="text-align: center;">' . $fila["fecha"] . '</td>
-                <td style="text-align: center;">' . $fila["nombre_producto"] . '</td>
+                <td style="text-align: center;">' . $fila["nombre"] . '</td>
                 <td style="text-align: center;">' . $fila["cantidad"] . '</td>
                 <td style="text-align: center;">' . $fila["total"] . '</td>
+                <td style="text-align: center;"><a href="'. $fila["ticket"] .'" download="comprobante.pdf">
+                    <button>Descargar</button>
+                </a></td>
                 </tr>';
                 }
             } else {

@@ -50,7 +50,7 @@ require("global/librerias.php");
                             <h4><b>Descripción: </b> </h3>
 							<p style="text-align: justify;"><?php echo $descripcion; ?></p>
 							<h4><b>Precio: </b> </h3>
-                            <p>$ <?php echo $precio; ?><span style="font-size: 15px;">,00</p>
+                            <p>$ <?php echo $precio; ?></p>
 							<!-- acomodar este boton-->
 							<?php echo'
 							<form action="compras.php" method="POST">

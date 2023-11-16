@@ -1,4 +1,7 @@
 <?php
+if (isset($_SESSION["login"])) {
+	header("location:index.php");
+}
 require("global/consultas.php");
 require("global/librerias.php");
 ?>
