@@ -33,6 +33,12 @@ $pdf->Cell(90, 0, "Email:");
 $pdf->SetFont('Arial', '', 13);
 $pdf->SetX(40);
 $pdf->Cell(90, 0, " giigashoop@gmail.com");
+$pdf->SetX(120);
+$pdf->SetFont('Arial', 'B', 13);
+$pdf->Cell(90, 0, "Numero de Ticket:");
+$pdf->SetX(165);
+$pdf->SetFont('Arial', '', 13);
+$pdf->Cell(90, 0, $numeroTicket);
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 20);
 $pdf->Cell(0, 30, 'Ticket de Compra', 0, 1, 'C');
@@ -61,7 +67,7 @@ $pdf->SetX(130);
 $pdf->Cell(90, 0, $dni);
 
 
-$pdf->SetY(90);
+$pdf->SetY(85);
 $pdf->SetFont('Arial', 'B', 13);
 $pdf->Cell(90, 0, "Telefono:");
 $pdf->SetFont('Arial', '', 13);
@@ -88,7 +94,7 @@ $pdf->Cell(40, 10, 'Precio', 1, 1, 'C');
 
 $subtotal = 0;
 foreach ($_SESSION["carrito_aux"] as $articulo) {
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', '', 13);
     $pdf->Cell(40, 10, $articulo["cantidad"], 1, 0, 'C');
     $pdf->Cell(100, 10, $articulo["nombre"], 1, 0, 'C');
     $pdf->Cell(40, 10, $articulo["precio"], 1, 1, 'C');

@@ -2,33 +2,8 @@
 if (!(isset($_SESSION["login"]))) {
     header("location: index.php");
 }
-require("global/conexion.php");
+require("global/consultas.php");
 require("global/librerias.php");
-/*
-if (isset($_POST["botonModificar"])) {
-    $codigo = $_POST["inputCodigo"];
-    $categoria = $_POST["inputCategoria"];
-    $fechaAlta = $_POST["inputFecha"];
-    $nombre = $_POST["inputNombre"];
-    $cantidad = $_POST["inputCantidad"];
-    $descripcion = $_POST["inputDescripcion"];
-    $precio = $_POST["inputPrecio"];
-    if ($_FILES['inputImagen']["error"] > 0) {
-        $ruta = "productos/default.png";
-    } else {
-        $nombreImagen = $_FILES['inputImagen']["name"];
-        $ruta = "productos/" . $nombreImagen;
-        $contenido = file_get_contents($_FILES['inputImagen']["tmp_name"]);
-        move_uploaded_file($_FILES['inputImagen']["tmp_name"], $ruta);
-    }
-    $sql = "UPDATE productos SET categoria ='" . $categoria . "', fechaAlta='" . $fechaAlta . "', nombre='" . $nombre . "', cantidad='" . $cantidad . "', descripcion='" . $descripcion . "', precio='" . $precio . "', imagen='" . $ruta . "' WHERE codigo='" . $codigo . "'";
-    $conexion = conectar();
-    $modificar = mysqli_query($conexion, $sql);
-    if ($modificar) {
-        mysqli_close($conexion);
-        header("location:gestion.php");
-    }
-}*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,38 +29,23 @@ if (isset($_POST["botonModificar"])) {
                 <div class="container col-6">
                     <div class="form-group">
                         <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="text" name="inputNombre" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                        <input type="text" name="inputNombre" value="<?php echo $_SESSION["nombre"];?>" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
                         <small class="form-text text-muted">Introduce tu nombre</small>
                     </div>
                     <div class="form-group">
                         <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="text" name="inputApellido" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                        <input type="text" name="inputApellido" value="<?php echo $_SESSION["apellido"];?>"  style="font-size: 20px; background-color: #333; color: white;" class="form-control">
                         <small class="form-text text-muted">Introduce tu apellido</small>
                     </div>
                     <div class="form-group">
                         <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="text" name="inputEmail" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                        <input type="text" name="inputEmail" value="<?php echo $_SESSION["email"];?>"  style="font-size: 20px; background-color: #333; color: white;" class="form-control">
                         <small class="form-text text-muted">Introduce email</small>
                     </div>
                     <div class="form-group">
                         <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="text" name="inputTelefono" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
+                        <input type="text" name="inputTelefono" value="<?php echo $_SESSION["telefono"];?>"  style="font-size: 20px; background-color: #333; color: white;" class="form-control">
                         <small class="form-text text-muted">Introduce tu numero de telefono</small>
-                    </div>
-                    <div class="form-group">
-                        <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="password" name="inputClaveAnterior" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
-                        <small class="form-text text-muted">Introduce tu contraseña anterior</small>
-                    </div>
-                    <div class="form-group">
-                        <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="password" name="inputClaveNueva" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
-                        <small class="form-text text-muted">Introduce tu nueva contraseña</small>
-                    </div>
-                    <div class="form-group">
-                        <label style="font-size: 20px;" class="form-label mt-4"></label>
-                        <input type="password" name="inputConfirmarClave" style="font-size: 20px; background-color: #333; color: white;" class="form-control">
-                        <small class="form-text text-muted">Confirma tu contraseña</small>
                     </div>
                     <?php
                     if (isset($guardado)) {
@@ -94,10 +54,10 @@ if (isset($_POST["botonModificar"])) {
                     ?>
                     <div class="d-flex justify-content-center mt-2">
                         <div style="margin-right: 10%;">
-                            <a class="btn btn-lg btn-outline-primary" href="gestion.php">Volver</a>
+                            <a class="btn btn-lg btn-outline-primary" href="index.php">Volver</a>
                         </div>
                         <div>
-                            <button class="btn btn-lg btn-outline-primary" name="botonModificar">Modificar</button>
+                            <button class="btn btn-lg btn-outline-primary" name="botonPerfil">Modificar</button>
                         </div>
                     </div>
                 </div>

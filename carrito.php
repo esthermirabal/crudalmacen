@@ -20,30 +20,10 @@ if (isset($_POST['codigo'])) {
     ];
     array_push($_SESSION['carrito'], $articulo);
 
-    
-    //Aquí  
-    //var_dump($_SESSION["carrito"]);
-    /*
-    foreach($_SESSION["carrito"] as $articulo){
-        echo 'cantidad:'.$articulo["cantidad"];
-        echo '<br>';
-        echo 'codigo:'.$articulo["codigo"];
-        echo '<br>';
-    }
-    carrito = [
-        [],
-        []
-    ]
-    
-    */
 }
-if(isset($_POST["eliminarItem"])){ //Elimina los items del carrito ordenandolos en forma ordenada
-    //var_dump($_SESSION["carrito"]);
-    //echo "<br>";
+if(isset($_POST["eliminarItem"])){ //Elimina los items del carrito dejandolos de forma ordenada
     $index = $_POST["eliminarItem"];
-    //unset($_SESSION["carrito"][$index]); 
     array_splice($_SESSION["carrito"], $index,1);
-    //var_dump($_SESSION["carrito"]);
 }
 
 ?>

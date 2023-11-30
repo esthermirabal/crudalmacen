@@ -1,4 +1,3 @@
-<!--HACER PAGINA DE REGISTRAR CON FORMULARIOS, ACOMODAR BOTONES Y VER DETALLES-->
 <?php
 require("global/consultas.php");
 require("global/librerias.php");
@@ -66,8 +65,6 @@ require("global/librerias.php");
             </form>
         </div>
     </div>
-
-    
     <?php require("global/footer.php"); ?>
     <script src="js/bootstrap.bundle.js"></script>
 </body>

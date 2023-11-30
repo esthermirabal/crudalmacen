@@ -59,6 +59,22 @@ if (isset($_POST["botonModificar"])) {
 		header("location:gestion.php");
 	}
 }
+if (isset($_POST["botonPerfil"])) {
+	$nombre = $_POST["inputNombre"];
+	$apellido = $_POST["inputApellido"];
+	$email = $_POST["inputEmail"];
+	$telefono = $_POST["inputTelefono"];
+	$sql = "UPDATE usuarios SET  nombre='" . $nombre . "', apellido='" . $apellido . "', email='" . $email . "', telefono='" . $telefono . "' WHERE id='" . $_SESSION["id"] . "'";
+	$conexion = conectar();
+	$modificar = mysqli_query($conexion, $sql);
+	if ($modificar) {
+		$_SESSION["nombre"] = $nombre;
+		$_SESSION["apellido"] = $apellido;
+		$_SESSION["email"] = $email;
+		$_SESSION["telefono"] = $telefono;
+		mysqli_close($conexion);
+	}
+}
 if (isset($_POST["botonEliminar"])) {
 	$codigo = $_POST["inputCodigo"];
 	$categoria = $_POST["inputCategoria"];
@@ -76,7 +92,7 @@ if (isset($_POST["botonEliminar"])) {
 		header("location:gestion.php");
 	}
 }
-//No carga la imagen da error, pero si carga el resto de los datos
+
 if (isset($_POST["botonGuardar"])) {
 	$conexion = conectar();
 	$categoria = $_POST["inputCategoria"];
@@ -84,7 +100,6 @@ if (isset($_POST["botonGuardar"])) {
 	$cantidad = $_POST["inputCantidad"];
 	$descripcion = $_POST["inputDescripcion"];
 	$precio = $_POST["inputPrecio"];  //atributos de un producto
-	//var_dump($_FILES);
 	$imagen = $_FILES["input_imagen"];
 	if ($_FILES['input_imagen']["error"] > 0) {
 		$ruta = "productos/default.png";
@@ -93,7 +108,6 @@ if (isset($_POST["botonGuardar"])) {
 		$ruta = "productos/" . $nombreImagen;
 		$contenido = $_FILES['input_imagen']["tmp_name"];
 		move_uploaded_file($contenido, $ruta);
-
 		//Verifica si el archivo se ha movido correctamente antes de intentar leerlo
 		if (!$contenido) {
 			echo "No se pudo leer el archivo.";
@@ -146,7 +160,7 @@ if (isset($_POST["botonRegistro"])) {
 	$apellido = $_POST["inputApellido"];
 	$dni = $_POST["inputDni"];
 	$usuario = $_POST["inputNombreUsuario"];
-	$clave = $_POST["inputClaveUsuario"]; // Aquí asumo que "inputClaveUsuario" es el campo de contraseña
+	$clave = $_POST["inputClaveUsuario"]; 
 	$email = $_POST["inputEmail"];
 	$telefono = $_POST["inputTelefono"]; 
 
@@ -172,9 +186,6 @@ if (isset($_POST["botonRegistro"])) {
         ';
 		exit; // Salir del script en caso de error
 	}
-
-	// Realiza la inserción en la base de datos
-	//$sql = "INSERT INTO usuarios (nombre, clave) VALUES ('$usuario', '$clave')";
 	$sql = "INSERT INTO usuarios (nombre, apellido, dni, usuario, clave, email, telefono) VALUES ('$nombre', '$apellido', '$dni','$usuario', '$clave','$email', '$telefono')";
 	$guardar = mysqli_query($conexion, $sql);
 	if ($guardar) {
@@ -201,8 +212,6 @@ if (isset($_POST["botonRegistro"])) {
 function listarBusqueda()
 {
 	if (isset($_POST["inputBuscar"])) {
-		//$inputs = $_POST;
-		//var_dump($inputs["inputBuscar"]);
 		$conexion = conectar();
 		if ($conexion != null) {
 			$buscar= "%".$_POST["inputBuscar"]."%";
@@ -210,7 +219,6 @@ function listarBusqueda()
 			$consulta = mysqli_query($conexion, $sql);
 			if (mysqli_num_rows($consulta) > 0) {
 				while ($datos = mysqli_fetch_assoc($consulta)) {
-					//var_dump($datos);
 					echo '
 					<tr>
 					<th scope="row">' . $datos["codigo"] . '</th>
@@ -244,22 +252,27 @@ function listarBusqueda()
 	}
 }
 
-
-function verProductos($paginaActual, $productosPorPagina)
+function verProductos($paginaActual, $productosPorPagina, $categoria)
 {
 	$conexion = conectar();
 	$inicio = ($paginaActual - 1) * $productosPorPagina;
+	$sqlCantidad = "SELECT * FROM productos";
 	$sql = "SELECT * FROM productos ORDER BY codigo ASC LIMIT $inicio, $productosPorPagina";
+	if($categoria != "Todos" ){
+		$sqlCantidad= "SELECT * FROM productos WHERE categoria = '".$categoria."' ";
+		$sql = "SELECT * FROM productos WHERE categoria = '".$categoria."' ORDER BY codigo ASC LIMIT $inicio, $productosPorPagina ";
+	}
+	$consultaCantidad = mysqli_query($conexion, $sqlCantidad);
 	$consulta = mysqli_query($conexion, $sql);
 	if (mysqli_num_rows($consulta) > 0) {
 		while ($datos = mysqli_fetch_assoc($consulta)) { //para agregar al carrito y redireccionar a los detalles del producto
 			echo '
-			<div class="card mb-4 mx-2" style="width: 18rem; margin: 20px;">
+			<div class="card col-3">
 				<img src="' . $datos["imagen"] . '" class="card-img-top" alt="..." style="width: 230px; height: 250px; margin: 12px;">
 				</a>
 				<div class="card-body" >
 					<h5 class="card-title" style="text-align: center;">' . $datos["nombre"] . '</h5>
-					<h4 class="card-text" style="text-align: center;">$ ' . $datos["precio"] . '<span style="font-size: 15px;">,00</h4>
+					<h4 class="card-text" style="text-align: center;">$ ' . $datos["precio"] . '<span style="font-size: 15px;"></h4>
 					<div style="text-align: center;">
     					<a href="detalles.php?codigo='.$datos["codigo"].'" class="btn btn-secondary">Ver detalles</a>
 					</div>
@@ -268,13 +281,6 @@ function verProductos($paginaActual, $productosPorPagina)
 			';
 		}
 	}
+	return mysqli_num_rows($consultaCantidad);
 }
 ?>
-
-
-<!--
-GET: BUSCAR
-DELETE: BORRAR
-PUT: MODIFICA UNA PARTE
-Y PATCH: MODIFICA TODO
-POST: GUARDAR-->

@@ -11,6 +11,11 @@
                         <span class="visually-hidden">(current)</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="productos.php">Productos
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
                 <?php
                 if (isset($_SESSION["login"]) && $_SESSION["tipo"] == "user") {
                  echo '<li class="nav-item">
@@ -18,11 +23,16 @@
                      <span class="visually-hidden">(current)</span>
                     </a>
                 </li>';
+                echo '<li class="nav-item">
+                    <a class="nav-link active" href="compras.php"><i class="fa-solid fa-cart-shopping"></i>
+                     <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>';
                 }
                 if (!(isset($_SESSION["login"]))) {
                     echo '<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="true" aria-expanded="false">Cuenta</a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="registro.php">Registrarse</a>
                         <a class="dropdown-item" href="login.php">Iniciar Sesión</a>
                     </div>

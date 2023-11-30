@@ -1,5 +1,3 @@
-<!--cuando toque la imagen, que redireccione a detalles detalle.php?codigo=1 
-y esto es lo qe hace que cambie por cada una de las fotos-->
 <?php
 require("global/consultas.php");
 require("global/librerias.php");
@@ -17,15 +15,7 @@ require("global/librerias.php");
 <body>
 	<?php require("global/navbar.php"); ?>
 	<?php
-	// Incluye el archivo de conexión a la base de datos si es necesario
-	// require("global/conexion.php");
-
-	// Verifica si se ha proporcionado un parámetro 'codigo' en la URL
 	if (isset($_GET["codigo"])) {
-		// Obtiene el valor del parámetro 'codigo' de la URL
-
-		// Realiza una consulta a la base de datos para obtener detalles del producto con el código proporcionado
-		// $conexion debe ser la conexión a la base de datos configurada adecuadamente
 		$conexion = conectar();
 		$sql = "SELECT * FROM productos WHERE codigo='".$_GET["codigo"]."'";
 		// Ejecuta la consulta
@@ -51,7 +41,6 @@ require("global/librerias.php");
 							<p style="text-align: justify;"><?php echo $descripcion; ?></p>
 							<h4><b>Precio: </b> </h3>
                             <p>$ <?php echo $precio; ?></p>
-							<!-- acomodar este boton-->
 							<?php echo'
 							<form action="compras.php" method="POST">
 								<input type="number" name="cantidad" value="1" min="1" style="width: 60px; height: 40px; margin-left: 15px;">
